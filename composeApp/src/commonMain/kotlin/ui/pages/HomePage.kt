@@ -38,11 +38,5 @@ fun HomePage(navController: NavHostController) {
             Text(text = "Call use case")
         }
 
-        Button(
-            onClick = {}
-        ) {
-            Text("teste")
-        }
-
     }
 }
