@@ -1,4 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -7,9 +6,9 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.kspCompose)
+    alias(libs.plugins.jetbrains.kotlin.serialization)
+    alias(libs.plugins.ksp)
     alias(libs.plugins.room)
-//    alias(libs.plugins.kotlinCocoapods)
 }
 
 kotlin {
@@ -35,30 +34,22 @@ kotlin {
         }
     }
 
-//    cocoapods {
-//        summary = "Some description for the Shared Module"
-//        homepage = "Link to the Shared Module homepage"
-//        version = "1.0"
-//        ios.deploymentTarget = "17.4"
-//        podfile = project.file("../iosApp/Podfile")
-//        framework {
-//            baseName = "shared"
-//            isStatic = true
-//        }
-//        pod("lottie-ios") {
-//            version = "4.4.3"
-//            linkOnly = true
-//        }
-//    }
+    jvm("desktop")
+
+    room {
+        schemaDirectory("$projectDir/schemas")
+    }
 
     sourceSets {
+        val desktopMain by getting
 
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
-            implementation(libs.room.runtime.android)
+            implementation(libs.ktor.client.okhttp)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -67,20 +58,39 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-            implementation(libs.kotlinx.datetime)
-            implementation(libs.room.runtime)
+            implementation(libs.androidx.lifecycle.viewmodel)
+            implementation(libs.androidx.lifecycle.runtime.compose)
+
+            implementation(libs.androidx.lifecycle.viewmodel)
+            implementation(libs.androidx.lifecycle.runtime.compose)
+            implementation(libs.jetbrains.compose.navigation)
+            implementation(libs.kotlinx.serialization.json)
+            implementation(libs.androidx.room.runtime)
             implementation(libs.sqlite.bundled)
-            api(libs.koin.core)
             implementation(libs.koin.compose)
-            implementation(libs.koin.composeVM)
-            implementation(libs.lifecycle.viewmodel)
-            implementation(libs.navigation.compose)
+            implementation(libs.koin.compose.viewmodel)
+            api(libs.koin.core)
+
+            implementation(libs.bundles.ktor)
+            implementation(libs.bundles.coil)
+        }
+        desktopMain.dependencies {
+            implementation(compose.desktop.currentOs)
+            implementation(libs.kotlinx.coroutines.swing)
+            implementation(libs.ktor.client.okhttp)
+        }
+        nativeMain.dependencies {
+            implementation(libs.ktor.client.darwin)
+        }
+
+        dependencies {
+            ksp(libs.androidx.room.compiler)
         }
     }
 }
 
 android {
-    namespace = "org.mrx.notes"
+    namespace = "adl.appture.kcmp"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -88,7 +98,7 @@ android {
     sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
     defaultConfig {
-        applicationId = "org.mrx.notes"
+        applicationId = "adl.appture.kcmp"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
@@ -116,12 +126,8 @@ android {
     }
 }
 
-room {
-    schemaDirectory("$projectDir/schemas")
-}
-
 dependencies {
-    add("kspCommonMainMetadata", libs.room.compiler)
+    debugImplementation(compose.uiTooling)
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>>().configureEach {

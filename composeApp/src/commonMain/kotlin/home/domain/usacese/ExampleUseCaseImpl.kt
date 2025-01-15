@@ -1,4 +1,4 @@
-package domain.usacese
+package home.domain.usacese
 
 class ExampleUseCaseImpl: ExampleUseCase {
     override suspend fun invoke(): String {

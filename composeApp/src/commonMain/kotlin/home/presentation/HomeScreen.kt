@@ -1,4 +1,4 @@
-package ui.pages
+package home.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -7,19 +7,37 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.annotation.KoinExperimentalAPI
-import ui.viewmodel.HomePageViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import home.presentation.viewmodel.HomePageViewModel
 
-@OptIn(KoinExperimentalAPI::class)
 @Composable
-fun HomePage(navController: NavHostController) {
-    val viewModel = koinViewModel<HomePageViewModel>()
+fun HomeScreenRoot(
+    viewModel: HomePageViewModel,
+    onBackClick: () -> Unit
+) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    HomeScreen(
+        state = state,
+        onAction = { action ->
+            when (action) {
+                HomeScreenAction.OnBackButtonClick -> onBackClick()
+                else                               -> Unit
+            }
+            viewModel.onAction(action)
+        }
+    )
+}
+
+@Composable
+fun HomeScreen(
+    state: HomeScreenState,
+    onAction: (HomeScreenAction) -> Unit
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -27,13 +45,13 @@ fun HomePage(navController: NavHostController) {
     ) {
 
         Text(
-            text = viewModel.message.value.ifEmpty { "Hey there, how's it going?" },
+            text = state.message,
             color = Color.Red,
             modifier = Modifier.padding(16.dp)
         )
 
         Button(onClick = {
-            viewModel.callUseCase()
+            onAction(HomeScreenAction.OnUseCaseButtonClick)
         }) {
             Text(text = "Call use case")
         }
