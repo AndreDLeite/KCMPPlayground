@@ -50,6 +50,12 @@ fun HomeScreen(
             modifier = Modifier.padding(16.dp)
         )
 
+        Text(
+            text = "Esta na navgraph do ecommerce",
+            color = Color.Red,
+            modifier = Modifier.padding(16.dp)
+        )
+
         Button(onClick = {
             onAction(HomeScreenAction.OnUseCaseButtonClick)
         }) {

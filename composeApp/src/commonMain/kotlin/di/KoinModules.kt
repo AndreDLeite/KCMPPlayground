@@ -1,36 +1,20 @@
 package di
 
+import e_commerce.di.ecommerceModule
 import home.domain.usacese.ExampleUseCase
 import home.domain.usacese.ExampleUseCaseImpl
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
 import home.presentation.viewmodel.HomePageViewModel
+import org.koin.core.module.Module
 
-//expect fun platformModule(): Module
+expect val platformModule: Module
 
 fun initKoin(config: KoinAppDeclaration? = null) = startKoin {
     config?.invoke(this)
     modules(
-        provideDataSourceModule,
-        provideRepositoryModule,
-        provideUseCaseModule,
-        provideViewModelModule,
+        platformModule,
+        ecommerceModule
     )
-}
-
-val provideDataSourceModule = module {
-    //singleOf(::ExampleDataSourceImpl).bind<ExampleDataSource>()
-}
-
-val provideRepositoryModule = module {
-    //singleOf(::ExampleDataSourceImpl).bind<ExampleDataSource>()
-}
-
-val provideUseCaseModule = module {
-    single<ExampleUseCase> { ExampleUseCaseImpl() }
-}
-
-val provideViewModelModule = module {
-    factory { HomePageViewModel(get()) }
 }
