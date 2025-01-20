@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">KMPPlayground</string>
     <string name="search_hint">Search…</string>
+    <string name="welcome_user">Welcome, %1$s</string>
     <string name="close_hint">Clear search</string>
     <string name="search_results">Search Results</string>
     <string name="favorites">Favorites</string>

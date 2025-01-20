@@ -1,6 +1,7 @@
 package home.presentation
 
+import home.domain.ProjectType
+
 sealed interface HomeScreenAction {
-    data object OnBackButtonClick: HomeScreenAction
-    data object OnUseCaseButtonClick: HomeScreenAction
+    data class OnProjectClick(val project: ProjectType): HomeScreenAction
 }

@@ -1,7 +1,6 @@
 package e_commerce.presentation.product_home
 
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -9,14 +8,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import core.presentation.EmptyContentComponent
+import core.presentation.LoadingScreen
+import e_commerce.presentation.product_home.components.HomeTabComponent
 import e_commerce.presentation.product_home.components.HomeTopBar
 import e_commerce.presentation.product_home.components.ProductsHomeNavigationDrawer
+import kmpplayground.composeapp.generated.resources.Res
+import kmpplayground.composeapp.generated.resources.baseline_shopping_cart_24
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun ProductHomeScreenRoot(
     viewModel: ProductHomeViewModel,
     onFavoritesClick: () -> Unit,
     onShoppingCartClick: () -> Unit,
+    onProductClick: (productId: String) -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -26,6 +32,7 @@ fun ProductHomeScreenRoot(
             when (action) {
                 is ProductHomeAction.OnFavoritesClick -> onFavoritesClick()
                 is ProductHomeAction.OnShoppingCartClick -> onShoppingCartClick()
+                is ProductHomeAction.OnProductClick -> onProductClick(action.productId)
                 else -> Unit
             }
             viewModel.onAction(action)
@@ -51,7 +58,7 @@ fun ProductHomeScreen(
                 .fillMaxSize(),
             topBar = {
                 HomeTopBar(
-                    modifier = Modifier.fillMaxWidth(),
+                    userName = state.userName,
                     onFavoritesClick = {
                         onAction(ProductHomeAction.OnFavoritesClick)
                     },
@@ -65,7 +72,37 @@ fun ProductHomeScreen(
             },
         ) {
             Surface(modifier = Modifier.padding(top = it.calculateTopPadding())) {
-                //HomeTabRow(navigator = navGraphNavigator)
+                HomeTabComponent(
+                    state = state,
+                    onAction = { action ->
+                        onAction(action)
+                    },
+                    productsTabContent = {
+                        when {
+                            state.isLoading -> {
+                                LoadingScreen()
+                            }
+
+                            state.products.isEmpty() -> {
+                                EmptyContentComponent(
+                                    painter = painterResource(Res.drawable.baseline_shopping_cart_24),
+                                    message = "Ops, something went wrong...",
+                                    withRetryButton = true,
+                                )
+                            }
+
+                            else -> {
+                                ProductListScreenRoot(state) { action ->
+                                    onAction(action)
+                                }
+                            }
+                        }
+
+                    },
+                    mapsTabContent = {
+                        //ProductMapsScreen()
+                    }
+                )
             }
         }
     }

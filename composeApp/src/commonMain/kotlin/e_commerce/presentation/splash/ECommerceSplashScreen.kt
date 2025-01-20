@@ -13,7 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.input.key.Key.Companion.R
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -21,14 +20,12 @@ import androidx.compose.ui.unit.dp
 import core.presentation.LightOrange
 import kmpplayground.composeapp.generated.resources.Res
 import kmpplayground.composeapp.generated.resources.baseline_shopping_cart_24
-import kmpplayground.composeapp.generated.resources.compose_multiplatform
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun ECommerceSplashScreenRoot() {
     ECommerceSplashScreen()
 }
-
 
 @Composable
 fun ECommerceSplashScreen(

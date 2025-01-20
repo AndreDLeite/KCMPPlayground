@@ -1,4 +1,4 @@
-package e_commerce.domain
+package e_commerce.domain.factory
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -7,6 +7,7 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.Settings
+import e_commerce.domain.models.NavigationItemsModel
 
 object NavigationItemsFactory {
     fun generateNavigationOptions(): List<NavigationItemsModel> = listOf(

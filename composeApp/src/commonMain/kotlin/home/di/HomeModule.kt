@@ -1,12 +1,10 @@
-package e_commerce.di
+package home.di
 
-import core.data.HttpClientFactory
-import e_commerce.presentation.product_home.ProductHomeViewModel
-import e_commerce.presentation.splash.ECommerceSplashViewModel
+import home.presentation.viewmodel.HomePageViewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-internal val ecommerceModule: Module = module {
+internal val homeModule: Module = module {
     getDataSources(this)
     getRepository(this)
     getUseCases(this)
@@ -28,10 +26,9 @@ private fun getUseCases(module: Module) = with(module) {
 }
 
 private fun getViewModels(module: Module) = with(module) {
-    factory { ECommerceSplashViewModel() }
-    factory { ProductHomeViewModel() }
+    factory { HomePageViewModel() }
 }
 
 private fun getFactories(module: Module) = with(module) {
-    single { HttpClientFactory.create(get()) }
+
 }

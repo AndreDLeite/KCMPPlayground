@@ -26,9 +26,23 @@ class ProductHomeViewModel : ViewModel() {
 
     fun onAction(action: ProductHomeAction) {
         when(action) {
-            is ProductHomeAction.OnProductClick      -> TODO()
-            is ProductHomeAction.OnSearchQueryChange -> TODO()
-            is ProductHomeAction.OnTabSelected       -> TODO()
+            is ProductHomeAction.OnProductClick      -> {
+
+            }
+            is ProductHomeAction.OnSearchQueryChange ->  {
+                _state.update {
+                    it.copy(
+                        searchQuery = action.query
+                    )
+                }
+            }
+            is ProductHomeAction.OnTabSelected       -> {
+                _state.update {
+                    it.copy(
+                        selectedTabIndex = action.index
+                    )
+                }
+            }
             is ProductHomeAction.OnDrawerClick       -> {
                 _state.update {
                     it.copy(

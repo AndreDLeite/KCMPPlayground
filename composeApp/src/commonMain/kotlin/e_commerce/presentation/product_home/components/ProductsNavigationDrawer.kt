@@ -26,7 +26,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import e_commerce.domain.NavigationItemsFactory
+import e_commerce.domain.factory.NavigationItemsFactory
 import kotlinx.coroutines.launch
 
 @Composable
@@ -55,7 +55,7 @@ fun ProductsHomeNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
             ModalDrawerSheet {
-                Spacer(modifier = Modifier.height(16.dp)) //space (margin) from top
+                Spacer(modifier = Modifier.height(16.dp))
                 Row(
                     horizontalArrangement = Arrangement.End,
                     modifier = Modifier.fillMaxWidth()

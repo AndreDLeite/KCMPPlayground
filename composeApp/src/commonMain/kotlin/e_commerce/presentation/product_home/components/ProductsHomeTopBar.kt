@@ -18,26 +18,30 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import core.presentation.LightOrange
+import core.presentation.UiText
 import kmpplayground.composeapp.generated.resources.Res
 import kmpplayground.composeapp.generated.resources.baseline_favorite_24
+import kmpplayground.composeapp.generated.resources.go_back
+import kmpplayground.composeapp.generated.resources.welcome_user
+import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeTopBar(
-    modifier: Modifier,
+    userName: String,
     onFavoritesClick: () -> Unit,
     onShoppingCartClick: () -> Unit,
     onProfileIconClick: () -> Unit,
 ) {
     TopAppBar(
-        modifier = modifier,
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = LightOrange,
         ),
         title = {
             Text(
-                "Welcome, Andre Leite",
+                text = stringResource(Res.string.welcome_user, userName),
                 fontWeight = FontWeight.SemiBold,
                 maxLines = 1,
                 fontSize = MaterialTheme.typography.titleMedium.fontSize,
@@ -52,7 +56,7 @@ fun HomeTopBar(
                     .padding(start = 16.dp, end = 8.dp)
                     .size(36.dp)
                     .clickable {
-                        onProfileIconClick.invoke()
+                        onProfileIconClick()
                     },
             )
         },

@@ -1,4 +1,4 @@
-package e_commerce.domain
+package e_commerce.domain.models
 
 import androidx.compose.ui.graphics.vector.ImageVector
 
