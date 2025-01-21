@@ -1,6 +1,10 @@
 package e_commerce.di
 
 import core.data.HttpClientFactory
+import e_commerce.data.network.KtorRemoteProductDataSource
+import e_commerce.data.network.RemoteProductDataSource
+import e_commerce.data.repository.ProductRepositoryImpl
+import e_commerce.domain.repository.ProductRepository
 import e_commerce.presentation.product_home.ProductHomeViewModel
 import e_commerce.presentation.splash.ECommerceSplashViewModel
 import org.koin.core.module.Module
@@ -16,11 +20,11 @@ internal val ecommerceModule: Module = module {
 }
 
 private fun getDataSources(module: Module) = with(module) {
-
+    factory<RemoteProductDataSource> { KtorRemoteProductDataSource(get()) }
 }
 
 private fun getRepository(module: Module) = with(module) {
-
+    factory<ProductRepository> { ProductRepositoryImpl(get()) }
 }
 
 private fun getUseCases(module: Module) = with(module) {
@@ -29,7 +33,7 @@ private fun getUseCases(module: Module) = with(module) {
 
 private fun getViewModels(module: Module) = with(module) {
     factory { ECommerceSplashViewModel() }
-    factory { ProductHomeViewModel() }
+    factory { ProductHomeViewModel(get()) }
 }
 
 private fun getFactories(module: Module) = with(module) {

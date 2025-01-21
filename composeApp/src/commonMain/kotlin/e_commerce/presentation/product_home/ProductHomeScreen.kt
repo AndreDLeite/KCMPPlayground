@@ -14,6 +14,7 @@ import e_commerce.presentation.product_home.components.HomeTabComponent
 import e_commerce.presentation.product_home.components.HomeTopBar
 import e_commerce.presentation.product_home.components.ProductsHomeNavigationDrawer
 import kmpplayground.composeapp.generated.resources.Res
+import kmpplayground.composeapp.generated.resources.baseline_clear_24
 import kmpplayground.composeapp.generated.resources.baseline_shopping_cart_24
 import org.jetbrains.compose.resources.painterResource
 
@@ -83,10 +84,20 @@ fun ProductHomeScreen(
                                 LoadingScreen()
                             }
 
+                            state.errorMessage != null -> {
+                                EmptyContentComponent(
+                                    painter = painterResource(Res.drawable.baseline_clear_24),
+                                    message = "Ops, something went wrong...",
+                                    withRetryButton = true,
+                                ) {
+                                    onAction(ProductHomeAction.OnRetryClick)
+                                }
+                            }
+
                             state.products.isEmpty() -> {
                                 EmptyContentComponent(
                                     painter = painterResource(Res.drawable.baseline_shopping_cart_24),
-                                    message = "Ops, something went wrong...",
+                                    message = "No products found...",
                                     withRetryButton = true,
                                 )
                             }

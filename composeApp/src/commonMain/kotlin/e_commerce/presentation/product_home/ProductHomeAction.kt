@@ -7,4 +7,5 @@ sealed interface ProductHomeAction {
     data object OnDrawerClick : ProductHomeAction
     data object OnFavoritesClick : ProductHomeAction
     data object OnShoppingCartClick : ProductHomeAction
+    data object OnRetryClick : ProductHomeAction
 }
