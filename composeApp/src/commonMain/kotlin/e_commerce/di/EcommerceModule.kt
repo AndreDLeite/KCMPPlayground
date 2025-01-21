@@ -1,6 +1,9 @@
 package e_commerce.di
 
+import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import core.data.HttpClientFactory
+import e_commerce.data.database.DatabaseFactory
+import e_commerce.data.database.FavoriteProductDatabase
 import e_commerce.data.network.KtorRemoteProductDataSource
 import e_commerce.data.network.RemoteProductDataSource
 import e_commerce.data.repository.ProductRepositoryImpl
@@ -15,7 +18,6 @@ import org.koin.dsl.module
 internal val ecommerceModule: Module = module {
     getDataSources(this)
     getRepository(this)
-    getUseCases(this)
     getViewModels(this)
     getFactories(this)
 
@@ -26,11 +28,7 @@ private fun getDataSources(module: Module) = with(module) {
 }
 
 private fun getRepository(module: Module) = with(module) {
-    factory<ProductRepository> { ProductRepositoryImpl(get()) }
-}
-
-private fun getUseCases(module: Module) = with(module) {
-
+    factory<ProductRepository> { ProductRepositoryImpl(get(), get()) }
 }
 
 private fun getViewModels(module: Module) = with(module) {
@@ -41,4 +39,12 @@ private fun getViewModels(module: Module) = with(module) {
 
 private fun getFactories(module: Module) = with(module) {
     single { HttpClientFactory.create(get()) }
+    single {
+        get<DatabaseFactory>()
+            .create()
+            .setDriver(BundledSQLiteDriver())
+            .build()
+
+    }
+    single { get<FavoriteProductDatabase>().favoritesProductDao }
 }

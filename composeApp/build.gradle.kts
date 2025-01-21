@@ -1,3 +1,4 @@
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -12,10 +13,6 @@ plugins {
 }
 
 kotlin {
-    sourceSets.commonMain {
-        kotlin.srcDir("build/generated/ksp/metadata")
-    }
-
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
@@ -93,10 +90,6 @@ android {
     namespace = "adl.appture.kcmp"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    sourceSets["main"].res.srcDirs("src/androidMain/res")
-    sourceSets["main"].resources.srcDirs("src/commonMain/resources")
-
     defaultConfig {
         applicationId = "adl.appture.kcmp"
         minSdk = libs.versions.android.minSdk.get().toInt()
@@ -118,22 +111,20 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    buildFeatures {
-        compose = true
-    }
-    dependencies {
-        debugImplementation(compose.uiTooling)
-    }
 }
 
 dependencies {
-    implementation(libs.androidx.material3.android)
-    implementation(libs.androidx.ui.android)
     debugImplementation(compose.uiTooling)
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>>().configureEach {
-    if (name != "kspCommonMainKotlinMetadata" ) {
-        dependsOn("kspCommonMainKotlinMetadata")
+compose.desktop {
+    application {
+        mainClass = "adl.appture.kcmp.MainKt"
+
+        nativeDistributions {
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            packageName = "com.adl.appture"
+            packageVersion = "1.0.0"
+        }
     }
 }

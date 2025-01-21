@@ -8,6 +8,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconToggleButton
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import core.presentation.TransparentLightWhite
 import core.presentation.VividRed
 import e_commerce.domain.models.Product
@@ -16,11 +17,13 @@ import e_commerce.domain.models.Product
 fun ProductFavoritesComponent(
     product: Product,
     isProductFavorite: Boolean,
+    modifier: Modifier,
     onFavoriteIconClick: (Product) -> Unit,
 ) {
     Surface(
         shape = CircleShape,
-        color = TransparentLightWhite
+        color = TransparentLightWhite,
+        modifier = modifier,
     ) {
         IconToggleButton(
             checked = isProductFavorite,

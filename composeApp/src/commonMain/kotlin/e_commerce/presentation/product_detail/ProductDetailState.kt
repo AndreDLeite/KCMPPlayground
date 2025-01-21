@@ -7,4 +7,5 @@ data class ProductDetailState(
     val isLoading: Boolean = true,
     val errorMessage: UiText? = null,
     val currentProduct: Product? = null,
+    val isFavorite: Boolean = false,
 )

@@ -15,14 +15,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import core.presentation.DSDefaultText
 import core.presentation.EmptyContentComponent
 import core.presentation.LightOrange
 import core.presentation.LoadingScreen
+import e_commerce.presentation.product_detail.components.ProductDetailsInfo
 import e_commerce.presentation.product_detail.components.ProductDetailsMovingBackground
 import kmpplayground.composeapp.generated.resources.Res
+import kmpplayground.composeapp.generated.resources.add_to_cart
 import kmpplayground.composeapp.generated.resources.baseline_clear_24
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun ProductDetailsScreenRoot(
@@ -34,9 +36,9 @@ fun ProductDetailsScreenRoot(
     ProductDetailsScreen(
         state = state,
         onAction = { action ->
-            when(action) {
+            when (action) {
                 is ProductDetailAction.OnGoBackClick -> onGoBackClick()
-                else -> viewModel.onAction(action)
+                else                                 -> viewModel.onAction(action)
             }
         }
     )
@@ -55,7 +57,7 @@ fun ProductDetailsScreen(
             state.currentProduct?.let {
                 Row(
                     horizontalArrangement = Arrangement.Center,
-                    modifier = Modifier.padding(16.dp)
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
                 ) {
                     Button(
                         modifier = Modifier.fillMaxWidth(),
@@ -64,16 +66,19 @@ fun ProductDetailsScreen(
 
                         }
                     ) {
-                        Text("Add to cart", color = Color.Black)
+                        Text(
+                            stringResource(Res.string.add_to_cart),
+                            color = Color.Black,
+                        )
                     }
                 }
             }
         }
     ) { _ ->
-        when  {
-            state.isLoading -> LoadingScreen()
+        when {
+            state.isLoading              -> LoadingScreen()
 
-            state.errorMessage != null -> {
+            state.errorMessage != null   -> {
                 EmptyContentComponent(
                     painter = painterResource(Res.drawable.baseline_clear_24),
                     message = state.errorMessage.asString(),
@@ -95,7 +100,9 @@ fun ProductDetailsScreen(
                         onAction(ProductDetailAction.OnGoBackClick)
                     }
                 ) {
-                    DSDefaultText("AOooowba olha eu aqui!")
+                    ProductDetailsInfo(state) { product ->
+                        onAction(ProductDetailAction.OnAddToFavoritesClick(product))
+                    }
                 }
             }
         }

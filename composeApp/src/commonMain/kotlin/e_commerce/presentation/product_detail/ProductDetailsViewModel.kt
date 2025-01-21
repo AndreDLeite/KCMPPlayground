@@ -8,6 +8,8 @@ import core.presentation.toUiText
 import e_commerce.domain.repository.ProductRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -22,6 +24,7 @@ class ProductDetailsViewModel(
     val state = _state
         .onStart {
             getProductInfo()
+            observeFavoritesStatus()
         }
         .stateIn(
             viewModelScope,
@@ -57,17 +60,40 @@ class ProductDetailsViewModel(
                     }
                 }
         }
-
     }
 
     fun onAction(action: ProductDetailAction) {
         when (action) {
-            is ProductDetailAction.OnAddToFavoritesClick -> TODO()
+            is ProductDetailAction.OnAddToFavoritesClick -> {
+                viewModelScope.launch {
+                    if (state.value.isFavorite) {
+                        productRepository.deleteFromFavorites(productId)
+                    } else {
+                        state.value.currentProduct?.let { product ->
+                            productRepository.markAsFavorites(product)
+                        }
+                    }
+                }
+            }
+
             is ProductDetailAction.OnRetryClick          -> {
                 getProductInfo()
             }
+
             else                                         -> Unit
         }
+    }
+
+    private fun observeFavoritesStatus() {
+        productRepository
+            .isProductFavorite(productId)
+            .onEach { isFavorite ->
+                _state.update {
+                    it.copy(
+                        isFavorite = isFavorite
+                    )
+                }
+            }.launchIn(viewModelScope)
     }
 
 }
