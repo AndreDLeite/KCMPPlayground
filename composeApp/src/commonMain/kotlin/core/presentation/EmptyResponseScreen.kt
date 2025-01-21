@@ -1,6 +1,7 @@
 package core.presentation
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,11 +29,14 @@ fun EmptyContentComponent(
     painterColor: Color = VividRed,
     message: String,
     withRetryButton: Boolean = false,
-    onRetryClick: () -> Unit = {}
+    onRetryClick: () -> Unit = {},
+    withGoBackButton: Boolean = false,
+    onGoBackClick: () -> Unit = {}
 ) {
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
@@ -59,10 +63,23 @@ fun EmptyContentComponent(
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(containerColor = LightOrange),
                 onClick = {
-                    onRetryClick.invoke()
+                    onRetryClick()
                 }
             ) {
                 Text("Try again", color = Color.Black)
+            }
+        }
+
+        if (withGoBackButton) {
+            Spacer(modifier = Modifier.height(16.dp))
+            Button(
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
+                onClick = {
+                    onGoBackClick()
+                }
+            ) {
+                Text("Back", color = Color.White)
             }
         }
     }

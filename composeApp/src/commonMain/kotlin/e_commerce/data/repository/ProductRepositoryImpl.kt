@@ -22,4 +22,10 @@ class ProductRepositoryImpl(
         }
     }
 
+    override suspend fun getProductById(productId: String): Result<Product, DataError.Remote> {
+        return remoteProductDataSource.getProductById(productId).map { dto ->
+            dto.toProduct()
+        }
+    }
+
 }

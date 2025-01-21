@@ -123,7 +123,7 @@ class ProductHomeViewModel(
                         it.copy(
                             products = emptyList(),
                             isLoading = false,
-                            errorMessage = errorMessage.toUiText().toString(),
+                            errorMessage = errorMessage.toUiText(),
                         )
                     }
                 }

@@ -5,9 +5,11 @@ import e_commerce.data.network.KtorRemoteProductDataSource
 import e_commerce.data.network.RemoteProductDataSource
 import e_commerce.data.repository.ProductRepositoryImpl
 import e_commerce.domain.repository.ProductRepository
+import e_commerce.presentation.product_detail.ProductDetailsViewModel
 import e_commerce.presentation.product_home.ProductHomeViewModel
 import e_commerce.presentation.splash.ECommerceSplashViewModel
 import org.koin.core.module.Module
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
 internal val ecommerceModule: Module = module {
@@ -32,8 +34,9 @@ private fun getUseCases(module: Module) = with(module) {
 }
 
 private fun getViewModels(module: Module) = with(module) {
-    factory { ECommerceSplashViewModel() }
-    factory { ProductHomeViewModel(get()) }
+    viewModel { ECommerceSplashViewModel() }
+    viewModel { ProductHomeViewModel(get()) }
+    viewModel { (productId: String) -> ProductDetailsViewModel(productId, get()) }
 }
 
 private fun getFactories(module: Module) = with(module) {

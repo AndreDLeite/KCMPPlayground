@@ -87,7 +87,7 @@ fun ProductHomeScreen(
                             state.errorMessage != null -> {
                                 EmptyContentComponent(
                                     painter = painterResource(Res.drawable.baseline_clear_24),
-                                    message = "Ops, something went wrong...",
+                                    message = state.errorMessage.asString(),
                                     withRetryButton = true,
                                 ) {
                                     onAction(ProductHomeAction.OnRetryClick)

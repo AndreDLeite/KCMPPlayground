@@ -1,13 +1,8 @@
 package app.navigation
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Modifier
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
@@ -16,6 +11,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.toRoute
+import e_commerce.presentation.product_detail.ProductDetailsScreenRoot
+import e_commerce.presentation.product_detail.ProductDetailsViewModel
 import e_commerce.presentation.product_home.ProductHomeScreenRoot
 import e_commerce.presentation.product_home.ProductHomeViewModel
 import e_commerce.presentation.splash.ECommerceSplashScreenRoot
@@ -24,6 +21,7 @@ import home.presentation.ProjectsHubHomeScreenRoot
 import home.presentation.viewmodel.HomePageViewModel
 import kotlinx.coroutines.flow.Flow
 import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun NavGraph(navGraphNavigator: NavHostController) {
@@ -87,8 +85,15 @@ fun NavGraph(navGraphNavigator: NavHostController) {
 
             composable<Screens.ECommerceProductDetails> { entry ->
                 val args = entry.toRoute<Screens.ECommerceProductDetails>()
+                val viewModel = koinViewModel<ProductDetailsViewModel> {
+                    parametersOf(args.productId)
+                }
 
-                //ProductDetailsScreen(productId = args.productId, navController = navGraphNavigator)
+                ProductDetailsScreenRoot(
+                    viewModel = viewModel
+                ) {
+                    navGraphNavigator.navigateUp()
+                }
 
             }
         }
