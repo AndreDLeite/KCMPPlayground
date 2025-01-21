@@ -8,6 +8,7 @@ import e_commerce.data.network.KtorRemoteProductDataSource
 import e_commerce.data.network.RemoteProductDataSource
 import e_commerce.data.repository.ProductRepositoryImpl
 import e_commerce.domain.repository.ProductRepository
+import e_commerce.presentation.favorite_products.FavoriteProductsViewModel
 import e_commerce.presentation.product_detail.ProductDetailsViewModel
 import e_commerce.presentation.product_home.ProductHomeViewModel
 import e_commerce.presentation.splash.ECommerceSplashViewModel
@@ -34,6 +35,7 @@ private fun getRepository(module: Module) = with(module) {
 private fun getViewModels(module: Module) = with(module) {
     viewModel { ECommerceSplashViewModel() }
     viewModel { ProductHomeViewModel(get()) }
+    viewModel { FavoriteProductsViewModel(get()) }
     viewModel { (productId: String) -> ProductDetailsViewModel(productId, get()) }
 }
 

@@ -11,6 +11,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.toRoute
+import e_commerce.presentation.favorite_products.FavoriteProductsScreenRoot
+import e_commerce.presentation.favorite_products.FavoriteProductsViewModel
 import e_commerce.presentation.product_detail.ProductDetailsScreenRoot
 import e_commerce.presentation.product_detail.ProductDetailsViewModel
 import e_commerce.presentation.product_home.ProductHomeScreenRoot
@@ -76,7 +78,16 @@ fun NavGraph(navGraphNavigator: NavHostController) {
             }
 
             composable<Screens.ECommerceFavorites> {
-                Text("Tela de favoritos!")
+                val viewModel = koinViewModel<FavoriteProductsViewModel>()
+                FavoriteProductsScreenRoot(
+                    viewModel = viewModel,
+                    onGoBackClick = {
+                        navGraphNavigator.navigateUp()
+                    },
+                    onProductClick = { productId ->
+                        navGraphNavigator.navigate(Screens.ECommerceProductDetails(productId))
+                    }
+                )
             }
 
             composable<Screens.ECommerceCart> {

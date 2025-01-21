@@ -18,4 +18,6 @@
     <string name="error_serialization">Couldn\'t parse data.</string>
     <string name="add_to_cart">Add to cart</string>
     <string name="product_details_description_title">Description</string>
+    <string name="product_favorites_title">Favorites</string>
+    <string name="empty_product_favorites_title">You don't have any favorites!</string>
 </resources>
