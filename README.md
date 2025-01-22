@@ -9,7 +9,7 @@
 [![Compose Multiplatform](https://img.shields.io/badge/Compose-Multiplatform-4285F4?logo=jetpackcompose)](https://www.jetbrains.com/lp/compose-multiplatform/)
 [![Platform](https://img.shields.io/badge/Platform-iOS%20%7C%20Android-lightgrey)]()
 
- • [Features](#-features) • [Architecture](#-architecture) • 
+ • [Features](#-features) • [Architecture](#%EF%B8%8F-architecture) • 
 
 </div>
 
