@@ -1,14 +1,80 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Desktop.
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+<div align="center">
+  
+# Welcome to my Kotlin Compose Multiplatform Playground
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+## This project uses:
 
+[![Kotlin](https://img.shields.io/badge/Kotlin-Multiplatform-7F52FF?logo=kotlin)](https://kotlinlang.org/docs/multiplatform.html)
+[![Compose Multiplatform](https://img.shields.io/badge/Compose-Multiplatform-4285F4?logo=jetpackcompose)](https://www.jetbrains.com/lp/compose-multiplatform/)
+[![Platform](https://img.shields.io/badge/Platform-iOS%20%7C%20Android-lightgrey)]()
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+ • [Features](#-features) • [Architecture](#%EF%B8%8F-architecture) • 
+
+</div>
+
+## ✨ Features
+### Core Features
+- 📱 Single codebase for iOS and Android platforms using Compose MultiPlatform
+- 🌍 [WIP-iOS] Google Maps
+- 🛢 Room as local Database
+- 🎨 Modern, intuitive user interface
+
+### Platform-Specific Features
+- 🤖 **Android**
+    - Google Maps integration with pin display
+    - Optimized for various Android versions
+
+- 🍎 **iOS**
+    - [WIP] 🏗️ 
+
+## 🛠️ Technology Stack
+
+### Core Technologies
+- **Kotlin Multiplatform Mobile (KMM)**
+    - Share business logic between platforms
+    - Efficient code sharing strategy
+
+- **Jetpack Compose Multiplatform**
+    - Modern declarative UI
+    - Consistent design across platforms
+    - Rich component library
+    - Custom composables for specific needs
+    - Usage of MVI with actions
+
+- **Dependency Injection**
+    - Koin for dependency management
+    - Clean architecture support
+    - Easy testing capabilities
+
+## 🏗️ Architecture
+
+The project follows Clean Architecture principles with MVI (Model-View-Intent) pattern:
+
+```
+├── commonMain
+│   ├── data
+│   │   ├── database
+│   │   ├── dta
+│   │   ├── mappers
+│   │   ├── network
+│   │   └── repository
+│   ├── di
+│   │   └── modules
+│   ├── domain
+│   │   ├── enums
+│   │   ├── factory
+│   │   ├── models
+│   │   └── repository
+│   ├── presentation
+│   │   ├── screen_name
+│   │   │   ├── viewmodels
+│   │   │   ├── actions
+│   │   │   ├── state
+│   │   |   └── components
+│   │   │   │   └── screencomponents
+├── androidMain
+│   └── platform
+└── iosMain
+    └── platform
+``` 
