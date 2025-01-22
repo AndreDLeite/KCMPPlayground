@@ -66,9 +66,12 @@ The project follows Clean Architecture principles with MVI (Model-View-Intent) p
 │   │   ├── models
 │   │   └── repository
 │   ├── presentation
-│   │   ├── viewmodel
-│   │   ├── screens 
-│   │   └── components 
+│   │   ├── screen_name
+│   │   │   ├── viewmodels
+│   │   │   ├── actions
+│   │   │   ├── state
+│   │   |   └── components
+│   │   │   │   └── screencomponents
 ├── androidMain
 │   └── platform
 └── iosMain
