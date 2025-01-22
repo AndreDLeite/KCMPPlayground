@@ -13,6 +13,7 @@ import core.presentation.LoadingScreen
 import e_commerce.presentation.product_home.components.HomeTabComponent
 import e_commerce.presentation.product_home.components.HomeTopBar
 import e_commerce.presentation.product_home.components.ProductsHomeNavigationDrawer
+import e_commerce.presentation.products_map.components.MapComponent
 import kmpplayground.composeapp.generated.resources.Res
 import kmpplayground.composeapp.generated.resources.baseline_clear_24
 import kmpplayground.composeapp.generated.resources.baseline_shopping_cart_24
@@ -111,7 +112,7 @@ fun ProductHomeScreen(
 
                     },
                     mapsTabContent = {
-                        //ProductMapsScreen()
+                        MapComponent()
                     }
                 )
             }

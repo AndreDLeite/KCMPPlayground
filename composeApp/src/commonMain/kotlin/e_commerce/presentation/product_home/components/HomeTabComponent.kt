@@ -1,10 +1,8 @@
 package e_commerce.presentation.product_home.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -18,7 +16,6 @@ import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -107,30 +104,10 @@ fun HomeTabComponent(
             when (tabItem[index].type) {
                 TabType.PRODUCTS_LIST -> {
                     productsTabContent()
-//                    Column(
-//                        modifier = Modifier.fillMaxSize(),
-//                        horizontalAlignment = Alignment.CenterHorizontally,
-//                        verticalArrangement = Arrangement.Center
-//                    ) {
-//                        Text("AOOOOWBA tela de produtos!")
-//                    }
                 }
 
                 TabType.MAPS          -> {
-//                    mapsTabContent()
-                    Column(
-                        modifier = Modifier.fillMaxSize(),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center
-                    ) {
-                        Text("Tela de Maps aqui, chu chu chu!")
-                    }
-
-//                    ProductMapsScreen(
-//                        modifier = Modifier
-//                            .fillMaxSize(),
-//                        navigator = navigator
-//                    )
+                    mapsTabContent()
                 }
             }
         }

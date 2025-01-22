@@ -1,7 +1,6 @@
 package e_commerce.presentation.product_home.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,12 +9,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -100,16 +97,6 @@ fun ProductsListComponent(
                                 )
                             }
                         }
-
-//                        Image(
-//                            painter = rememberAsyncImagePainter(
-//                                model = ImageRequest.Builder()
-//                                    .data(currentProduct.image)
-//                                    .size(coil.size.Size.ORIGINAL)
-//                                    .build()
-//                            ),
-//                            contentDescription = "CardImage",
-//                        )
 
                     }
 
