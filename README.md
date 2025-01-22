@@ -3,7 +3,8 @@
   
 # Welcome to my Kotlin Compose Multiplatform Playground
 
-This project uses:
+## This project uses:
+
 [![Kotlin](https://img.shields.io/badge/Kotlin-Multiplatform-7F52FF?logo=kotlin)](https://kotlinlang.org/docs/multiplatform.html)
 [![Compose Multiplatform](https://img.shields.io/badge/Compose-Multiplatform-4285F4?logo=jetpackcompose)](https://www.jetbrains.com/lp/compose-multiplatform/)
 [![Platform](https://img.shields.io/badge/Platform-iOS%20%7C%20Android-lightgrey)]()
