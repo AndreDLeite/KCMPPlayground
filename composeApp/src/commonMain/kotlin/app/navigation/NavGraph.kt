@@ -20,7 +20,7 @@ import e_commerce.presentation.product_home.ProductHomeViewModel
 import e_commerce.presentation.splash.ECommerceSplashScreenRoot
 import e_commerce.presentation.splash.ECommerceSplashViewModel
 import home.presentation.ProjectsHubHomeScreenRoot
-import home.presentation.viewmodel.HomePageViewModel
+import home.presentation.HomePageViewModel
 import kotlinx.coroutines.flow.Flow
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
@@ -91,7 +91,7 @@ fun NavGraph(navGraphNavigator: NavHostController) {
             }
 
             composable<Screens.ECommerceCart> {
-                Text("Tela do carrinho!")
+                Text("WIP")
             }
 
             composable<Screens.ECommerceProductDetails> { entry ->

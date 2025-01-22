@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -18,7 +19,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import core.presentation.DSDefaultText
 import core.presentation.LightOrange
 import home.domain.ProjectType
-import home.presentation.viewmodel.HomePageViewModel
+import home.presentation.components.ProjectHubTopBar
 
 @Composable
 fun ProjectsHubHomeScreenRoot(
@@ -34,6 +35,7 @@ fun ProjectsHubHomeScreenRoot(
                 is HomeScreenAction.OnProjectClick -> onProjectClick(action.project)
                 else                               -> Unit
             }
+            viewModel.onAction(action)
         }
     )
 }
@@ -44,34 +46,55 @@ fun ProjectsHubHomeScreen(
     modifier: Modifier = Modifier,
     onAction: (HomeScreenAction) -> Unit,
 ) {
-    LazyColumn(
+    Scaffold(
+        topBar = {
+            ProjectHubTopBar(
+                isSearching = state.isSearching
+            ) {
+                onAction(HomeScreenAction.OnSearchClick)
+            }
+        },
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        items(state.projects) { item ->
-            Card(
-                onClick = {
-                    onAction(HomeScreenAction.OnProjectClick(item.projectType))
-                },
-                colors = CardDefaults.cardColors(
-                    containerColor = LightOrange,
-                ),
-                modifier = modifier
-                    .fillParentMaxWidth()
-                    .height(120.dp)
+    ) { innerPadding ->
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = modifier
+                .fillMaxSize()
+                .padding(
+                    top = innerPadding.calculateTopPadding() + 16.dp,
+                )
+        ) {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp)
             ) {
-                Column (
-                    horizontalAlignment = Alignment.Start,
-                    modifier = modifier
-                        .fillMaxSize()
-                        .padding(16.dp)
-                ) {
-                    DSDefaultText(item.name)
-                    Spacer(modifier.height(8.dp))
-                    DSDefaultText(item.lastUpdated)
-                }
+                items(state.projects) { item ->
+                    Card(
+                        onClick = {
+                            onAction(HomeScreenAction.OnProjectClick(item.projectType))
+                        },
+                        colors = CardDefaults.cardColors(
+                            containerColor = LightOrange,
+                        ),
+                        modifier = modifier
+                            .fillParentMaxWidth()
+                            .height(120.dp)
+                    ) {
+                        Column(
+                            horizontalAlignment = Alignment.Start,
+                            modifier = modifier
+                                .fillMaxSize()
+                                .padding(16.dp)
+                        ) {
+                            DSDefaultText(item.name)
+                            Spacer(modifier.height(8.dp))
+                            DSDefaultText(item.lastUpdated)
+                        }
 
+                    }
+                }
             }
         }
     }

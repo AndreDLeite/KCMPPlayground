@@ -7,4 +7,5 @@ data class HomeScreenState(
     val message: String = "",
     val error: String = "",
     val projects: List<ProjectModel> = emptyList(),
+    val isSearching: Boolean = false,
 )

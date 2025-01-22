@@ -1,6 +1,6 @@
 package home.di
 
-import home.presentation.viewmodel.HomePageViewModel
+import home.presentation.HomePageViewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
 

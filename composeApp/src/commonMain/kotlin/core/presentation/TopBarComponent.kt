@@ -1,4 +1,4 @@
-package e_commerce.presentation.favorite_products.components
+package core.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
@@ -17,15 +17,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import core.presentation.LightOrange
-import core.presentation.LightWhite
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBarComponent(
     backgroundColor: Color = LightOrange,
     middleText: String = String(),
-    onBackClick: () -> Unit = {}
+    withBackButton: Boolean = true,
+    onBackClick: () -> Unit = {},
 ) {
     CenterAlignedTopAppBar(
         colors = TopAppBarDefaults.mediumTopAppBarColors(
@@ -43,20 +42,22 @@ fun TopBarComponent(
             )
         },
         navigationIcon = {
-            IconButton(
-                modifier = Modifier.size(48.dp),
-                onClick = {
-                    onBackClick.invoke()
+            if(withBackButton) {
+                IconButton(
+                    modifier = Modifier.size(48.dp),
+                    onClick = {
+                        onBackClick.invoke()
+                    }
+                ) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = "Back",
+                        modifier = Modifier
+                            .background(LightWhite)
+                            .padding(12.dp)
+                    )
                 }
-            ) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = "Back",
-                    modifier = Modifier
-                        .background(LightWhite)
-                        .padding(12.dp)
-                )
             }
-        }
+        },
     )
 }

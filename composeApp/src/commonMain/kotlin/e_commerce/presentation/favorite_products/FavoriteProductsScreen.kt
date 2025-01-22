@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import core.presentation.EmptyContentComponent
 import core.presentation.LightWhite
-import e_commerce.presentation.favorite_products.components.TopBarComponent
+import core.presentation.TopBarComponent
 import e_commerce.presentation.product_home.components.ProductsListComponent
 import e_commerce.presentation.product_home.components.ProductsSearchBar
 import kmpplayground.composeapp.generated.resources.Res
