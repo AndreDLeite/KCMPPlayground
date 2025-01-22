@@ -16,7 +16,7 @@
 ## ✨ Features
 ### Core Features
 - 📱 Single codebase for iOS and Android platforms using Compose MultiPlatform
-- 🌍 [WIP] Google Maps
+- 🌍 [WIP-iOS] Google Maps
 - 🎨 Modern, intuitive user interface
 
 ### Platform-Specific Features
