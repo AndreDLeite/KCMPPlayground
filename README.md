@@ -26,7 +26,7 @@
     - Optimized for various Android versions
 
 - 🍎 **iOS**
-    - [WIP] 🏗️ 
+    - Darwin
 
 ## 🛠️ Technology Stack
 
