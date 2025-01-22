@@ -17,6 +17,7 @@
 ### Core Features
 - 📱 Single codebase for iOS and Android platforms using Compose MultiPlatform
 - 🌍 [WIP-iOS] Google Maps
+- 🛢 Room as local Database
 - 🎨 Modern, intuitive user interface
 
 ### Platform-Specific Features
