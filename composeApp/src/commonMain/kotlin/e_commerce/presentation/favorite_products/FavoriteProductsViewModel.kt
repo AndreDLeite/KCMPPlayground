@@ -33,27 +33,37 @@ class FavoriteProductsViewModel(
     fun onAction(action: FavoriteProductsAction) {
         when (action) {
             is FavoriteProductsAction.OnSearchQueryChange -> {
-                val filteredList = currentProducts.filter {
-                    it.name.contains(
-                        action.query.trim(),
-                        ignoreCase = true
-                    )
-                }
                 _state.update {
                     it.copy(
-                        favoriteProducts = filteredList,
+                        searchQuery = action.query,
                     )
                 }
+                observeSearchQuery(action.query)
             }
             else -> Unit
         }
 
     }
 
+    private fun observeSearchQuery(query: String) {
+        val filteredList = currentProducts.filter {
+            it.name.contains(
+                query.trim(),
+                ignoreCase = true
+            )
+        }
+        _state.update {
+            it.copy(
+                favoriteProducts = filteredList,
+            )
+        }
+    }
+
     private fun observeFavoriteProducts() {
         productsRepository
             .getFavoriteProducts()
             .onEach { products ->
+                currentProducts = products.toMutableList()
                 _state.update {
                     it.copy(
                         favoriteProducts = products
