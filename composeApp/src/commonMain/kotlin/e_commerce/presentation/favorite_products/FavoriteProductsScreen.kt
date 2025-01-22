@@ -70,8 +70,7 @@ fun FavoriteProductsScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(
-                    vertical = innerPadding.calculateTopPadding() + 16.dp,
-                    horizontal = 16.dp
+                    top = innerPadding.calculateTopPadding(),
                 )
         ) {
             ProductsSearchBar(

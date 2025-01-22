@@ -17,6 +17,7 @@ struct GoogleMapView: UIViewRepresentable {
         marker.snippet = "Bengaluru"
         marker.map = mapView
         
+        
         return mapView
     }
 

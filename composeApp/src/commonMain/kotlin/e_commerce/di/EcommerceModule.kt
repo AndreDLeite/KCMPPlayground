@@ -11,7 +11,6 @@ import e_commerce.domain.repository.ProductRepository
 import e_commerce.presentation.favorite_products.FavoriteProductsViewModel
 import e_commerce.presentation.product_detail.ProductDetailsViewModel
 import e_commerce.presentation.product_home.ProductHomeViewModel
-import e_commerce.presentation.products_map.ProductsMapViewModel
 import e_commerce.presentation.splash.ECommerceSplashViewModel
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModel
@@ -38,7 +37,6 @@ private fun getViewModels(module: Module) = with(module) {
     viewModel { ProductHomeViewModel(get()) }
     viewModel { FavoriteProductsViewModel(get()) }
     viewModel { (productId: String) -> ProductDetailsViewModel(productId, get()) }
-    viewModel { ProductsMapViewModel() }
 }
 
 private fun getFactories(module: Module) = with(module) {

@@ -13,7 +13,6 @@ import core.presentation.LoadingScreen
 import e_commerce.presentation.product_home.components.HomeTabComponent
 import e_commerce.presentation.product_home.components.HomeTopBar
 import e_commerce.presentation.product_home.components.ProductsHomeNavigationDrawer
-import e_commerce.presentation.products_map.components.MapComponent
 import kmpplayground.composeapp.generated.resources.Res
 import kmpplayground.composeapp.generated.resources.baseline_clear_24
 import kmpplayground.composeapp.generated.resources.baseline_shopping_cart_24
@@ -32,10 +31,10 @@ fun ProductHomeScreenRoot(
         state = state,
         onAction = { action ->
             when (action) {
-                is ProductHomeAction.OnFavoritesClick -> onFavoritesClick()
+                is ProductHomeAction.OnFavoritesClick    -> onFavoritesClick()
                 is ProductHomeAction.OnShoppingCartClick -> onShoppingCartClick()
-                is ProductHomeAction.OnProductClick -> onProductClick(action.productId)
-                else -> Unit
+                is ProductHomeAction.OnProductClick      -> onProductClick(action.productId)
+                else                                     -> Unit
             }
             viewModel.onAction(action)
         },
@@ -81,7 +80,7 @@ fun ProductHomeScreen(
                     },
                     productsTabContent = {
                         when {
-                            state.isLoading -> {
+                            state.isLoading            -> {
                                 LoadingScreen()
                             }
 
@@ -95,7 +94,7 @@ fun ProductHomeScreen(
                                 }
                             }
 
-                            state.products.isEmpty() -> {
+                            state.products.isEmpty()   -> {
                                 EmptyContentComponent(
                                     painter = painterResource(Res.drawable.baseline_shopping_cart_24),
                                     message = "No products found...",
@@ -103,7 +102,7 @@ fun ProductHomeScreen(
                                 )
                             }
 
-                            else -> {
+                            else                       -> {
                                 ProductListScreenRoot(state) { action ->
                                     onAction(action)
                                 }
@@ -112,7 +111,11 @@ fun ProductHomeScreen(
 
                     },
                     mapsTabContent = {
-                        MapComponent()
+                        MapComponent(
+                            state = state,
+                        ) { productId ->
+                            onAction(ProductHomeAction.OnProductClick(productId))
+                        }
                     }
                 )
             }
