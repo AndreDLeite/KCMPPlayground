@@ -51,10 +51,7 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun ProductDetailsMovingBackground(
     productImage: String,
-    isFavorite: Boolean = false,
-    onFavoriteClick: () -> Unit = {},
     onBackClick: () -> Unit = {},
-    modifier: Modifier = Modifier,
     content: @Composable () -> Unit = {},
 ) {
     val infiniteTransition = rememberInfiniteTransition(label = "background")
@@ -93,7 +90,7 @@ fun ProductDetailsMovingBackground(
         ) {
             Box(
                 modifier = Modifier
-                    .weight(0.3f)
+                    .weight(0.2f)
                     .fillMaxWidth()
                     .background(color = Color.Blue)
                     .blur(40.dp)
@@ -114,7 +111,7 @@ fun ProductDetailsMovingBackground(
 
             Box(
                 modifier = Modifier
-                    .weight(0.7f)
+                    .weight(0.8f)
                     .fillMaxWidth()
                     .background(DesertWhite)
             )
@@ -143,7 +140,7 @@ fun ProductDetailsMovingBackground(
         ) {
             Spacer(
                 modifier = Modifier
-                    .fillMaxHeight(0.15f)
+                    .fillMaxHeight(0.05f)
             )
             AnimatedContent(
                 targetState = imageLoadResult

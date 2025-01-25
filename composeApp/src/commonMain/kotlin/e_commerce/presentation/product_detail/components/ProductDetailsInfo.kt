@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import e_commerce.domain.models.Product
@@ -28,6 +29,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun ProductDetailsInfo(
     state: ProductDetailState,
+    bottomPadding: Dp = 0.dp,
     onFavoritesClick: (Product) -> Unit,
 ) {
     val currentProduct = state.currentProduct ?: return
@@ -35,7 +37,7 @@ fun ProductDetailsInfo(
         verticalArrangement = Arrangement.Top,
         modifier = Modifier
             .verticalScroll(rememberScrollState())
-            .padding(start = 16.dp, end = 16.dp, bottom = 50.dp)
+            .padding(start = 16.dp, end = 16.dp, bottom = bottomPadding)
     ) {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,

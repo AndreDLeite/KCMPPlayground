@@ -1,30 +1,20 @@
 package e_commerce.presentation.product_detail
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import core.presentation.EmptyContentComponent
-import core.presentation.LightOrange
 import core.presentation.LoadingScreen
+import e_commerce.presentation.product_detail.components.ProductDetailsBottomComponent
 import e_commerce.presentation.product_detail.components.ProductDetailsInfo
 import e_commerce.presentation.product_detail.components.ProductDetailsMovingBackground
 import kmpplayground.composeapp.generated.resources.Res
-import kmpplayground.composeapp.generated.resources.add_to_cart
 import kmpplayground.composeapp.generated.resources.baseline_clear_24
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun ProductDetailsScreenRoot(
@@ -52,29 +42,20 @@ fun ProductDetailsScreen(
 ) {
     Scaffold(
         modifier = Modifier
+            .navigationBarsPadding()
             .fillMaxSize(),
         bottomBar = {
             state.currentProduct?.let {
-                Row(
-                    horizontalArrangement = Arrangement.Center,
-                    modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
-                ) {
-                    Button(
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = ButtonDefaults.buttonColors(containerColor = LightOrange),
-                        onClick = {
-
-                        }
-                    ) {
-                        Text(
-                            stringResource(Res.string.add_to_cart),
-                            color = Color.Black,
-                        )
+                ProductDetailsBottomComponent(
+                    quantity = state.addToCartQuantity,
+                    currentProduct = it,
+                    onAction = { action ->
+                        onAction(action)
                     }
-                }
+                )
             }
         }
-    ) { _ ->
+    ) { paddingValues ->
         when {
             state.isLoading              -> LoadingScreen()
 
@@ -100,7 +81,10 @@ fun ProductDetailsScreen(
                         onAction(ProductDetailAction.OnGoBackClick)
                     }
                 ) {
-                    ProductDetailsInfo(state) { product ->
+                    ProductDetailsInfo(
+                        state = state,
+                        bottomPadding = paddingValues.calculateBottomPadding()
+                    ) { product ->
                         onAction(ProductDetailAction.OnAddToFavoritesClick(product))
                     }
                 }

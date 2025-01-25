@@ -80,6 +80,29 @@ class ProductDetailsViewModel(
                 getProductInfo()
             }
 
+            is ProductDetailAction.OnMinusClick          -> {
+                if (_state.value.addToCartQuantity != 0) {
+                    _state.update {
+                        it.copy(
+                            addToCartQuantity = it.addToCartQuantity - 1
+                        )
+
+                    }
+                }
+            }
+
+            is ProductDetailAction.OnPlusClick           -> {
+                _state.update {
+                    it.copy(
+                        addToCartQuantity = it.addToCartQuantity + 1
+                    )
+                }
+            }
+
+            is ProductDetailAction.OnAddToCartClick      -> {
+
+            }
+
             else                                         -> Unit
         }
     }

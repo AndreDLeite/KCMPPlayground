@@ -6,17 +6,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.TextUnit
 
 @Composable
 fun DSDefaultText(
     text: String,
+    fontSize: TextUnit = MaterialTheme.typography.titleMedium.fontSize,
+    fontWeight: FontWeight = FontWeight.SemiBold,
     modifier: Modifier = Modifier
 ) {
     Text(
         text = text,
-        fontWeight = FontWeight.SemiBold,
+        fontWeight = fontWeight,
         maxLines = 1,
-        fontSize = MaterialTheme.typography.titleMedium.fontSize,
+        fontSize = fontSize,
         overflow = TextOverflow.Ellipsis,
         modifier = modifier,
     )

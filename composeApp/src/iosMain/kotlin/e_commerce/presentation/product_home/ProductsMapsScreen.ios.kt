@@ -13,6 +13,10 @@ actual fun MapComponent(
     onProductClick: (String) -> Unit
 ) {
     Box {
+//        UIKitView(
+//            factory = {
+//            }
+//        )
         UIKitViewController(
             factory = mapViewController,
             modifier = Modifier.fillMaxSize()
