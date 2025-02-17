@@ -17,6 +17,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,8 +27,6 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import core.presentation.DSDefaultText
-import core.presentation.LightOrange
-import core.presentation.LightWhite
 import e_commerce.domain.models.Product
 import e_commerce.presentation.product_detail.ProductDetailAction
 import kmpplayground.composeapp.generated.resources.Res
@@ -57,7 +56,7 @@ fun ProductDetailsBottomComponent(
             modifier = Modifier
                 .border(0.7.dp, Color.Black, CircleShape)
                 .clip(shape = RoundedCornerShape(50.dp))
-                .background(color = LightWhite)
+                .background(color = MaterialTheme.colorScheme.onBackground)
         ) {
 
             IconButton(
@@ -70,7 +69,7 @@ fun ProductDetailsBottomComponent(
                     //Icons.Filled.Remove is missing (???)
                     painter = painterResource(Res.drawable.baseline_remove_24),
                     contentDescription = "remove ${currentProduct.name} from cart quantity",
-                    tint = LightOrange,
+                    tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier
                         .padding(12.dp)
                 )
@@ -94,7 +93,7 @@ fun ProductDetailsBottomComponent(
                 Icon(
                     imageVector = Icons.Filled.Add,
                     contentDescription = "Add ${currentProduct.name} from cart quantity",
-                    tint = LightOrange,
+                    tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier
                         .padding(12.dp)
                 )
@@ -105,7 +104,7 @@ fun ProductDetailsBottomComponent(
 
         Button(
             modifier = Modifier.fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(containerColor = LightOrange),
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
             enabled = quantity != 0,
             onClick = {
                 onAction(

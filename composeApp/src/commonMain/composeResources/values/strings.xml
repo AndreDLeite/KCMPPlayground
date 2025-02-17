@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">KMPPlayground</string>
     <string name="welcome_projects_title">Welcome to ProjectsHub</string>
+    <!-- region e_commerce -->
+    <string name="ecommerce_splash_text">Welcome to Your E-Commerce App</string>
     <string name="search_hint">Search…</string>
     <string name="welcome_user">Welcome, %1$s</string>
     <string name="close_hint">Clear search</string>
@@ -21,4 +23,5 @@
     <string name="product_details_description_title">Description</string>
     <string name="product_favorites_title">Favorites</string>
     <string name="empty_product_favorites_title">You don't have any favorites!</string>
+    <!-- endregion -->
 </resources>

@@ -11,6 +11,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
@@ -27,12 +28,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import e_commerce.domain.factory.NavigationItemsFactory
+import e_commerce.domain.models.NavigationItemType
+import e_commerce.domain.models.NavigationItemType.*
 import kotlinx.coroutines.launch
 
 @Composable
 fun ProductsHomeNavigationDrawer(
     shouldOpenDrawer: Boolean,
     onDrawerCloseClick: () -> Unit,
+    onSettingsClick: () -> Unit,
+    onProfileClick: () -> Unit,
+    onNotificationClick: () -> Unit,
     content: @Composable () -> Unit
 ) {
     val items = NavigationItemsFactory.generateNavigationOptions()
@@ -63,6 +69,7 @@ fun ProductsHomeNavigationDrawer(
                     Icon(
                         imageVector = Icons.Default.Close,
                         contentDescription = null,
+                        tint = MaterialTheme.colorScheme.tertiaryContainer,
                         modifier = Modifier
                             .padding(end = 16.dp)
                             .clickable {
@@ -76,6 +83,11 @@ fun ProductsHomeNavigationDrawer(
                         selected = false,
                         onClick = {
                             selectedItemIndex = index
+                            when (item.itemType) {
+                                PROFILE -> onProfileClick()
+                                NOTIFICATIONS -> onNotificationClick()
+                                SETTINGS -> onSettingsClick()
+                            }
                             onDrawerCloseClick()
                         },
                         icon = {

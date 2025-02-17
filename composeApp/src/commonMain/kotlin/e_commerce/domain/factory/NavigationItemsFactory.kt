@@ -7,6 +7,7 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.Settings
+import e_commerce.domain.models.NavigationItemType
 import e_commerce.domain.models.NavigationItemsModel
 
 object NavigationItemsFactory {
@@ -14,18 +15,21 @@ object NavigationItemsFactory {
         NavigationItemsModel(
             title = "Profile",
             selectedIcon = Icons.Filled.Home,
-            unselectedIcon = Icons.Outlined.Home
+            unselectedIcon = Icons.Outlined.Home,
+            itemType = NavigationItemType.PROFILE,
         ),
         NavigationItemsModel(
             title = "Notifications",
             selectedIcon = Icons.Filled.Notifications,
             unselectedIcon = Icons.Outlined.Notifications,
-            badgeCount = 45
+            badgeCount = 45,
+            itemType = NavigationItemType.NOTIFICATIONS,
         ),
         NavigationItemsModel(
             title = "Settings",
             selectedIcon = Icons.Filled.Settings,
-            unselectedIcon = Icons.Outlined.Settings
+            unselectedIcon = Icons.Outlined.Settings,
+            itemType = NavigationItemType.SETTINGS,
         )
     )
 }

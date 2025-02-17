@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,6 +23,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
@@ -29,17 +31,19 @@ import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.MarkerInfoWindow
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
-import core.presentation.LightOrange
 import e_commerce.presentation.product_home.components.ProductRatingComponent
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
 actual fun MapComponent(
     state: ProductHomeState,
+    bottomPadding: Dp,
     onProductClick: (String) -> Unit
 ) {
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(bottom = bottomPadding)
     ) {
         val coordinates = LatLng(-19.9068341, -43.9289829)
         val cameraPositionState = rememberCameraPositionState {
@@ -79,7 +83,7 @@ actual fun MapComponent(
                         ProductRatingComponent(modifier = Modifier.fillMaxWidth(), product.rating)
                         Button(
                             modifier = Modifier.fillMaxWidth(),
-                            colors = ButtonDefaults.buttonColors(containerColor = LightOrange),
+                            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                             onClick = {}
                         ) {
                             Text("Check out!", color = Color.Black)

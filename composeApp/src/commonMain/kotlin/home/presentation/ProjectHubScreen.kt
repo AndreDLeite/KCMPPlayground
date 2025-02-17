@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -17,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import core.presentation.DSDefaultText
-import core.presentation.LightOrange
 import home.domain.ProjectType
 import home.presentation.components.ProjectHubTopBar
 
@@ -76,7 +76,7 @@ fun ProjectsHubHomeScreen(
                             onAction(HomeScreenAction.OnProjectClick(item.projectType))
                         },
                         colors = CardDefaults.cardColors(
-                            containerColor = LightOrange,
+                            containerColor = MaterialTheme.colorScheme.primary,
                         ),
                         modifier = modifier
                             .fillParentMaxWidth()

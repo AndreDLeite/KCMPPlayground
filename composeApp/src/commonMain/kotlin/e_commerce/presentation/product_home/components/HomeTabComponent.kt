@@ -10,6 +10,7 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
@@ -20,7 +21,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import core.presentation.LightOrange
 import e_commerce.domain.enums.TabType
 import e_commerce.domain.factory.TabItemFactory
 import e_commerce.presentation.product_home.ProductHomeAction
@@ -57,7 +57,7 @@ fun HomeTabComponent(
         TabRow(
             modifier = Modifier
                 .clip(RoundedCornerShape(0.dp, 0.dp, 15.dp, 15.dp))
-                .background(LightOrange),
+                .background(MaterialTheme.colorScheme.primary),
             containerColor = Color.Transparent,
             selectedTabIndex = state.selectedTabIndex,
             indicator = { tabPositions ->

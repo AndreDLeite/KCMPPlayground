@@ -6,6 +6,12 @@ data class NavigationItemsModel(
     val title: String,
     val selectedIcon: ImageVector,
     val unselectedIcon: ImageVector,
-    val badgeCount: Int? = null
+    val badgeCount: Int? = null,
+    val itemType: NavigationItemType,
 )
 
+enum class NavigationItemType {
+    PROFILE,
+    NOTIFICATIONS,
+    SETTINGS,
+}

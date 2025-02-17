@@ -6,11 +6,10 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconToggleButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import core.presentation.TransparentLightWhite
-import core.presentation.VividRed
 import e_commerce.domain.models.Product
 
 @Composable
@@ -22,7 +21,7 @@ fun ProductFavoritesComponent(
 ) {
     Surface(
         shape = CircleShape,
-        color = TransparentLightWhite,
+        color = MaterialTheme.colorScheme.onSurface,
         modifier = modifier,
     ) {
         IconToggleButton(
@@ -32,7 +31,7 @@ fun ProductFavoritesComponent(
             }
         ) {
             Icon(
-                tint = VividRed,
+                tint = MaterialTheme.colorScheme.error,
                 imageVector = if (isProductFavorite) {
                     Icons.Filled.Favorite
                 } else {

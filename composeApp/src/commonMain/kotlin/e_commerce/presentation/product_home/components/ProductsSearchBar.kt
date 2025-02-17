@@ -20,12 +20,10 @@ import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import core.presentation.DesertWhite
-import core.presentation.LightOrange
-import core.presentation.SandYellow
+import core.presentation.DSDefaultText
 import kmpplayground.composeapp.generated.resources.Res
 import kmpplayground.composeapp.generated.resources.close_hint
 import kmpplayground.composeapp.generated.resources.search_hint
@@ -40,28 +38,29 @@ fun ProductsSearchBar(
 ) {
     CompositionLocalProvider(
         LocalTextSelectionColors provides TextSelectionColors(
-            handleColor = SandYellow,
-            backgroundColor = SandYellow,
+            handleColor = MaterialTheme.colorScheme.secondary,
+            backgroundColor = MaterialTheme.colorScheme.secondary,
         )
     ) {
         OutlinedTextField(
             value = searchQuery,
+            textStyle = TextStyle(color = MaterialTheme.colorScheme.tertiary),
             onValueChange = onSearchQueryChange,
             shape = RoundedCornerShape(100),
             colors = OutlinedTextFieldDefaults.colors(
-                cursorColor = SandYellow,
-                focusedBorderColor = LightOrange,
+                cursorColor = MaterialTheme.colorScheme.secondary,
+                focusedBorderColor = MaterialTheme.colorScheme.primary,
             ),
             placeholder = {
                 Text(
-                    text = stringResource(Res.string.search_hint)
+                    text = stringResource(Res.string.search_hint),
                 )
             },
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Search,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+                    tint = MaterialTheme.colorScheme.tertiary
                 )
             },
             singleLine = true,
@@ -84,7 +83,7 @@ fun ProductsSearchBar(
                         Icon(
                             imageVector = Icons.Default.Close,
                             contentDescription = stringResource(Res.string.close_hint),
-                            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+                            tint = MaterialTheme.colorScheme.tertiary
                         )
                     }
                 }
@@ -92,7 +91,7 @@ fun ProductsSearchBar(
             modifier = modifier
                 .background(
                     shape = RoundedCornerShape(100),
-                    color = DesertWhite,
+                    color = MaterialTheme.colorScheme.background,
                 )
                 .minimumInteractiveComponentSize()
         )

@@ -11,6 +11,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.toRoute
+import app.presentation.AppAction
+import core.presentation.AppTheme
 import e_commerce.presentation.favorite_products.FavoriteProductsScreenRoot
 import e_commerce.presentation.favorite_products.FavoriteProductsViewModel
 import e_commerce.presentation.product_detail.ProductDetailsScreenRoot
@@ -26,7 +28,10 @@ import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
 @Composable
-fun NavGraph(navGraphNavigator: NavHostController) {
+fun NavGraph(
+    navGraphNavigator: NavHostController,
+    onGlobalEvent: (AppAction) -> Unit = {}
+) {
     NavHost(
         navController = navGraphNavigator,
         startDestination = Screens.ProjectsHub,
@@ -73,6 +78,15 @@ fun NavGraph(navGraphNavigator: NavHostController) {
                     },
                     onProductClick = { productId ->
                         navGraphNavigator.navigate(Screens.ECommerceProductDetails(productId))
+                    },
+                    onSettingsClick = {
+                        onGlobalEvent(AppAction.OnThemeChange(AppTheme.MacRed))
+                    },
+                    onProfileClick = {
+                        onGlobalEvent(AppAction.OnThemeChange(AppTheme.GoldenYellow))
+                    },
+                    onNotificationsClick = {
+                        onGlobalEvent(AppAction.OnThemeChange(AppTheme.BlueySky))
                     }
                 )
             }

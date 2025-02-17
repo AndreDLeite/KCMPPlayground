@@ -15,7 +15,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import core.presentation.LightOrange
 import kmpplayground.composeapp.generated.resources.Res
 import kmpplayground.composeapp.generated.resources.baseline_clear_24
 import kmpplayground.composeapp.generated.resources.baseline_search_24
@@ -31,13 +30,14 @@ fun ProjectHubTopBar(
 ) {
     TopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = LightOrange,
+            containerColor = MaterialTheme.colorScheme.primary,
         ),
         title = {
             Text(
                 text = stringResource(Res.string.welcome_projects_title),
                 fontWeight = FontWeight.SemiBold,
                 maxLines = 1,
+                color = MaterialTheme.colorScheme.tertiary,
                 fontSize = MaterialTheme.typography.titleMedium.fontSize,
                 overflow = TextOverflow.Ellipsis,
                 textAlign = TextAlign.Center,

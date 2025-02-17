@@ -1,21 +1,26 @@
 package e_commerce.presentation.product_home
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import core.presentation.EmptyContentComponent
 import core.presentation.LoadingScreen
 import e_commerce.presentation.product_home.components.HomeTabComponent
 import e_commerce.presentation.product_home.components.HomeTopBar
 import e_commerce.presentation.product_home.components.ProductsHomeNavigationDrawer
+import e_commerce.presentation.product_home.components.ProductsSearchBar
 import kmpplayground.composeapp.generated.resources.Res
 import kmpplayground.composeapp.generated.resources.baseline_clear_24
-import kmpplayground.composeapp.generated.resources.baseline_shopping_cart_24
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -24,6 +29,9 @@ fun ProductHomeScreenRoot(
     onFavoritesClick: () -> Unit,
     onShoppingCartClick: () -> Unit,
     onProductClick: (productId: String) -> Unit,
+    onSettingsClick: () -> Unit,
+    onProfileClick: () -> Unit,
+    onNotificationsClick: () -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -31,10 +39,13 @@ fun ProductHomeScreenRoot(
         state = state,
         onAction = { action ->
             when (action) {
-                is ProductHomeAction.OnFavoritesClick    -> onFavoritesClick()
-                is ProductHomeAction.OnShoppingCartClick -> onShoppingCartClick()
-                is ProductHomeAction.OnProductClick      -> onProductClick(action.productId)
-                else                                     -> Unit
+                is ProductHomeAction.OnFavoritesClick     -> onFavoritesClick()
+                is ProductHomeAction.OnShoppingCartClick  -> onShoppingCartClick()
+                is ProductHomeAction.OnProductClick       -> onProductClick(action.productId)
+                is ProductHomeAction.OnSettingsClick      -> onSettingsClick()
+                is ProductHomeAction.OnProfileClick       -> onProfileClick()
+                is ProductHomeAction.OnNotificationsClick -> onNotificationsClick()
+                else                                      -> Unit
             }
             viewModel.onAction(action)
         },
@@ -47,12 +58,22 @@ fun ProductHomeScreen(
     state: ProductHomeState,
     onAction: (ProductHomeAction) -> Unit,
 ) {
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     ProductsHomeNavigationDrawer(
         shouldOpenDrawer = state.shouldOpenDrawer,
         onDrawerCloseClick = {
             onAction(ProductHomeAction.OnDrawerClick)
         },
+        onSettingsClick = {
+            onAction(ProductHomeAction.OnSettingsClick)
+        },
+        onProfileClick = {
+            onAction(ProductHomeAction.OnProfileClick)
+        },
+        onNotificationClick = {
+            onAction(ProductHomeAction.OnNotificationsClick)
+        }
     ) {
         Scaffold(
             modifier = Modifier
@@ -66,53 +87,74 @@ fun ProductHomeScreen(
                     onShoppingCartClick = {
                         onAction(ProductHomeAction.OnShoppingCartClick)
                     },
-                    onProfileIconClick = {
+                    onDrawerClick = {
                         onAction(ProductHomeAction.OnDrawerClick)
                     }
                 )
             },
-        ) {
-            Surface(modifier = Modifier.padding(top = it.calculateTopPadding())) {
+        ) { innerPadding ->
+            Surface(modifier = Modifier.padding(top = innerPadding.calculateTopPadding())) {
                 HomeTabComponent(
                     state = state,
                     onAction = { action ->
                         onAction(action)
                     },
                     productsTabContent = {
-                        when {
-                            state.isLoading            -> {
-                                LoadingScreen()
-                            }
+                        Column(
+                            modifier = Modifier
+                                .fillMaxSize()
+                        ) {
+                            ProductsSearchBar(
+                                searchQuery = state.searchQuery,
+                                onSearchQueryChange = { query ->
+                                    onAction(ProductHomeAction.OnSearchQueryChange(query))
+                                },
+                                onImeSearch = {
+                                    keyboardController?.hide()
+                                },
+                                modifier = Modifier
+                                    .widthIn(max = 400.dp)
+                                    .fillMaxWidth()
+                                    .padding(16.dp)
+                            )
 
-                            state.errorMessage != null -> {
-                                EmptyContentComponent(
-                                    painter = painterResource(Res.drawable.baseline_clear_24),
-                                    message = state.errorMessage.asString(),
-                                    withRetryButton = true,
-                                ) {
-                                    onAction(ProductHomeAction.OnRetryClick)
+                            when {
+                                state.isLoading            -> {
+                                    LoadingScreen()
                                 }
-                            }
 
-                            state.products.isEmpty()   -> {
-                                EmptyContentComponent(
-                                    painter = painterResource(Res.drawable.baseline_shopping_cart_24),
-                                    message = "No products found...",
-                                    withRetryButton = true,
-                                )
-                            }
+                                state.errorMessage != null -> {
+                                    EmptyContentComponent(
+                                        painter = painterResource(Res.drawable.baseline_clear_24),
+                                        message = state.errorMessage.asString(),
+                                        withRetryButton = true,
+                                    ) {
+                                        onAction(ProductHomeAction.OnRetryClick)
+                                    }
+                                }
 
-                            else                       -> {
-                                ProductListScreenRoot(state) { action ->
-                                    onAction(action)
+                                state.products.isEmpty()   -> {
+                                    EmptyContentComponent(
+                                        painter = painterResource(Res.drawable.baseline_clear_24),
+                                        message = "No products found...",
+                                    )
+                                }
+
+                                else                       -> {
+                                    ProductListScreenRoot(
+                                        state,
+                                        bottomPadding = innerPadding.calculateBottomPadding()
+                                    ) { action ->
+                                        onAction(action)
+                                    }
                                 }
                             }
                         }
-
                     },
                     mapsTabContent = {
                         MapComponent(
                             state = state,
+                            bottomPadding = innerPadding.calculateBottomPadding(),
                         ) { productId ->
                             onAction(ProductHomeAction.OnProductClick(productId))
                         }

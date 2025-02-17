@@ -9,21 +9,16 @@ import androidx.compose.material.icons.rounded.ShoppingCart
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import core.presentation.LightOrange
-import core.presentation.UiText
+import core.presentation.DSDefaultText
 import kmpplayground.composeapp.generated.resources.Res
 import kmpplayground.composeapp.generated.resources.baseline_favorite_24
-import kmpplayground.composeapp.generated.resources.go_back
 import kmpplayground.composeapp.generated.resources.welcome_user
-import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -33,31 +28,31 @@ fun HomeTopBar(
     userName: String,
     onFavoritesClick: () -> Unit,
     onShoppingCartClick: () -> Unit,
-    onProfileIconClick: () -> Unit,
+    onDrawerClick: () -> Unit,
 ) {
     TopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = LightOrange,
+            containerColor = MaterialTheme.colorScheme.primary,
         ),
         title = {
-            Text(
+            DSDefaultText(
                 text = stringResource(Res.string.welcome_user, userName),
                 fontWeight = FontWeight.SemiBold,
-                maxLines = 1,
                 fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                overflow = TextOverflow.Ellipsis
             )
         },
         navigationIcon = {
             Icon(
                 imageVector = Icons.Rounded.Menu,
                 contentDescription = null,
+                tint = MaterialTheme.colorScheme.tertiaryContainer,
                 modifier = Modifier
                     .padding(start = 16.dp, end = 8.dp)
                     .size(36.dp)
                     .clickable {
-                        onProfileIconClick()
+                        onDrawerClick()
                     },
+
             )
         },
         actions = {

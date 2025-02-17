@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -14,7 +15,6 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import core.presentation.EmptyContentComponent
-import core.presentation.LightWhite
 import core.presentation.TopBarComponent
 import e_commerce.presentation.product_home.components.ProductsListComponent
 import e_commerce.presentation.product_home.components.ProductsSearchBar
@@ -90,7 +90,7 @@ fun FavoriteProductsScreen(
             if (state.favoriteProducts.isEmpty()) {
                 EmptyContentComponent(
                     painter = painterResource(Res.drawable.baseline_heart_broken_24),
-                    painterColor = LightWhite,
+                    painterColor = MaterialTheme.colorScheme.onBackground,
                     message = stringResource(Res.string.empty_product_favorites_title)
                 )
             } else {

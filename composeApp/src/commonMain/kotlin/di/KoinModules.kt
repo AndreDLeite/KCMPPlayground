@@ -1,5 +1,6 @@
 package di
 
+import app.di.appModule
 import e_commerce.di.ecommerceModule
 import home.di.homeModule
 import org.koin.core.context.startKoin
@@ -12,6 +13,7 @@ fun initKoin(config: KoinAppDeclaration? = null) = startKoin {
     config?.invoke(this)
     modules(
         platformModule,
+        appModule,
         homeModule,
         ecommerceModule
     )

@@ -23,6 +23,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -42,7 +43,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import coil3.compose.rememberAsyncImagePainter
-import core.presentation.DesertWhite
 import core.presentation.LoadingScreen
 import kmpplayground.composeapp.generated.resources.Res
 import kmpplayground.composeapp.generated.resources.baseline_shopping_cart_24
@@ -113,7 +113,7 @@ fun ProductDetailsMovingBackground(
                 modifier = Modifier
                     .weight(0.8f)
                     .fillMaxWidth()
-                    .background(DesertWhite)
+                    .background(MaterialTheme.colorScheme.background)
             )
         }
         IconButton(
