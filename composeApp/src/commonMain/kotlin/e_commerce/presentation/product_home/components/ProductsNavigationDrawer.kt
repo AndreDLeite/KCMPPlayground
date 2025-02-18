@@ -20,16 +20,11 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import e_commerce.domain.factory.NavigationItemsFactory
 import e_commerce.domain.models.NavigationItemType
-import e_commerce.domain.models.NavigationItemType.*
 import kotlinx.coroutines.launch
 
 @Composable
@@ -39,15 +34,12 @@ fun ProductsHomeNavigationDrawer(
     onSettingsClick: () -> Unit,
     onProfileClick: () -> Unit,
     onNotificationClick: () -> Unit,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val items = NavigationItemsFactory.generateNavigationOptions()
 
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
-    var selectedItemIndex by rememberSaveable {
-        mutableIntStateOf(0)
-    }
 
     LaunchedEffect(key1 = shouldOpenDrawer) {
         scope.launch {
@@ -82,11 +74,10 @@ fun ProductsHomeNavigationDrawer(
                         label = { Text(text = item.title) },
                         selected = false,
                         onClick = {
-                            selectedItemIndex = index
                             when (item.itemType) {
-                                PROFILE -> onProfileClick()
-                                NOTIFICATIONS -> onNotificationClick()
-                                SETTINGS -> onSettingsClick()
+                                NavigationItemType.PROFILE -> onProfileClick()
+                                NavigationItemType.NOTIFICATIONS -> onNotificationClick()
+                                NavigationItemType.SETTINGS -> onSettingsClick()
                             }
                             onDrawerCloseClick()
                         },

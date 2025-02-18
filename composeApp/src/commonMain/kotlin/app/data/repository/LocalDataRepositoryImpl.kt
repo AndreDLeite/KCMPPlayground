@@ -5,7 +5,7 @@ import app.data.datasource.LocalDataSource
 import app.data.mappers.toAppTheme
 import app.domain.repository.LocalDataRepository
 import core.domain.enums.AppTheme
-import core.presentation.APP_THEME_KEY
+import core.presentation.theme.APP_THEME_KEY
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

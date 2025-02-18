@@ -13,12 +13,11 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,6 +26,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import core.presentation.desing_system.DSDefaultText
+import core.presentation.desing_system.DsAnimatedCounter
 import e_commerce.domain.models.Product
 import e_commerce.presentation.product_detail.ProductDetailAction
 import kmpplayground.composeapp.generated.resources.Res
@@ -56,11 +56,12 @@ fun ProductDetailsBottomComponent(
             modifier = Modifier
                 .border(0.7.dp, Color.Black, CircleShape)
                 .clip(shape = RoundedCornerShape(50.dp))
-                .background(color = MaterialTheme.colorScheme.onBackground)
+                .background(color = MaterialTheme.colorScheme.background)
         ) {
 
             IconButton(
                 modifier = Modifier.size(48.dp),
+                enabled = quantity > 0,
                 onClick = {
                     onAction(ProductDetailAction.OnMinusClick)
                 }
@@ -77,10 +78,7 @@ fun ProductDetailsBottomComponent(
 
             Spacer(modifier = Modifier.width(12.dp))
 
-            DSDefaultText(
-                text = quantity.toString(),
-                modifier = Modifier.size(20.dp)
-            )
+            DsAnimatedCounter(counter = quantity)
 
             Spacer(modifier = Modifier.width(12.dp))
 
@@ -102,10 +100,8 @@ fun ProductDetailsBottomComponent(
 
         Spacer(modifier = Modifier.width(16.dp))
 
-        Button(
+        OutlinedButton(
             modifier = Modifier.fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
-            enabled = quantity != 0,
             onClick = {
                 onAction(
                     ProductDetailAction.OnAddToCartClick(
@@ -113,13 +109,18 @@ fun ProductDetailsBottomComponent(
                         quantity = quantity
                     )
                 )
-            }
+            },
+            enabled = quantity > 0,
+            shape = CircleShape,
+            colors = ButtonDefaults.outlinedButtonColors(
+                contentColor = Color.Black,
+                containerColor = MaterialTheme.colorScheme.primary,
+                disabledContainerColor = MaterialTheme.colorScheme.surfaceContainerLow
+            ),
         ) {
-            Text(
+            DSDefaultText(
                 stringResource(Res.string.add_to_cart),
-                color = Color.Black,
             )
         }
-
     }
 }

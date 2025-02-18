@@ -5,7 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import core.domain.enums.AppTheme
-import core.presentation.APP_THEME_KEY
+import core.presentation.theme.APP_THEME_KEY
 import kotlinx.coroutines.flow.Flow
 
 class LocalDataSourceImpl(

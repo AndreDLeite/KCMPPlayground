@@ -2,17 +2,13 @@ package app
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import app.navigation.NavGraph
 import app.presentation.AppAction
-import app.presentation.AppState
 import app.presentation.MainViewModel
-import core.presentation.MyApplicationTheme
-import kotlinx.coroutines.flow.StateFlow
+import core.presentation.theme.MyApplicationTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
