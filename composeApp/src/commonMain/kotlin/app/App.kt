@@ -2,6 +2,8 @@ package app
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -14,6 +16,7 @@ import kotlinx.coroutines.flow.StateFlow
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
+// Presentation -> Domain <- Data
 @Composable
 @Preview
 fun App() {

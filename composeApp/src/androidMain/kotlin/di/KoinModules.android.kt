@@ -1,5 +1,6 @@
 package di
 
+import app.createDataStore
 import e_commerce.data.database.DatabaseFactory
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.okhttp.OkHttp
@@ -11,4 +12,5 @@ actual val platformModule: Module
     get() = module {
         single<HttpClientEngine> { OkHttp.create() }
         single { DatabaseFactory(androidApplication()) }
+        single { createDataStore(androidApplication()) }
     }

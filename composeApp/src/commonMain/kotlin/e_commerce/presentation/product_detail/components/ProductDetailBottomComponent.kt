@@ -26,7 +26,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import core.presentation.DSDefaultText
+import core.presentation.desing_system.DSDefaultText
 import e_commerce.domain.models.Product
 import e_commerce.presentation.product_detail.ProductDetailAction
 import kmpplayground.composeapp.generated.resources.Res

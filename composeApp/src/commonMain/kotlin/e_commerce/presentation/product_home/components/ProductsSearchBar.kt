@@ -23,7 +23,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import core.presentation.DSDefaultText
 import kmpplayground.composeapp.generated.resources.Res
 import kmpplayground.composeapp.generated.resources.close_hint
 import kmpplayground.composeapp.generated.resources.search_hint

@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.LinearGradientShader
 import androidx.compose.ui.graphics.Shader
 import androidx.compose.ui.graphics.ShaderBrush
 import androidx.compose.ui.text.TextStyle
-import core.presentation.DSDefaultText
+import core.presentation.desing_system.DSDefaultText
 
 @Composable
 fun TextShimmerEffectAnimation(

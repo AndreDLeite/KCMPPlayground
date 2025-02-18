@@ -43,7 +43,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import coil3.compose.rememberAsyncImagePainter
-import core.presentation.LoadingScreen
+import core.presentation.desing_system.LoadingScreen
 import kmpplayground.composeapp.generated.resources.Res
 import kmpplayground.composeapp.generated.resources.baseline_shopping_cart_24
 import org.jetbrains.compose.resources.painterResource

@@ -1,35 +1,28 @@
 package app.di
 
+import app.data.datasource.LocalDataSource
+import app.data.datasource.LocalDataSourceImpl
+import app.data.repository.LocalDataRepositoryImpl
+import app.domain.repository.LocalDataRepository
 import app.presentation.MainViewModel
-import home.presentation.HomePageViewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
 internal val appModule: Module = module {
     getDataSources(this)
     getRepository(this)
-    getUseCases(this)
     getViewModels(this)
-    getFactories(this)
 
 }
 
 private fun getDataSources(module: Module) = with(module) {
-
+    factory<LocalDataSource> { LocalDataSourceImpl(get()) }
 }
 
 private fun getRepository(module: Module) = with(module) {
-
-}
-
-private fun getUseCases(module: Module) = with(module) {
-
+    factory<LocalDataRepository> { LocalDataRepositoryImpl(get()) }
 }
 
 private fun getViewModels(module: Module) = with(module) {
-    factory { MainViewModel() }
-}
-
-private fun getFactories(module: Module) = with(module) {
-
+    factory { MainViewModel(get()) }
 }

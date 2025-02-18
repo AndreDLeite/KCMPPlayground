@@ -1,4 +1,4 @@
-package core.presentation
+package core.presentation.desing_system
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text

@@ -32,7 +32,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.rememberAsyncImagePainter
-import core.presentation.LoadingScreen
+import core.presentation.desing_system.LoadingScreen
 import e_commerce.domain.models.Product
 import kmpplayground.composeapp.generated.resources.Res
 import kmpplayground.composeapp.generated.resources.baseline_shopping_cart_24

@@ -1,4 +1,4 @@
-package core.presentation
+package core.presentation.desing_system
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding

@@ -14,8 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import core.presentation.EmptyContentComponent
-import core.presentation.TopBarComponent
+import core.presentation.desing_system.EmptyContentComponent
+import core.presentation.desing_system.TopBarComponent
 import e_commerce.presentation.product_home.components.ProductsListComponent
 import e_commerce.presentation.product_home.components.ProductsSearchBar
 import kmpplayground.composeapp.generated.resources.Res

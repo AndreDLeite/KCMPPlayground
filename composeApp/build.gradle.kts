@@ -73,6 +73,9 @@ kotlin {
 
             implementation(libs.maps.compose)
 
+            api(libs.datastore.preferences)
+            api(libs.datastore)
+
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

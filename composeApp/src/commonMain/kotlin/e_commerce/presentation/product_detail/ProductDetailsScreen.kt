@@ -7,8 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import core.presentation.EmptyContentComponent
-import core.presentation.LoadingScreen
+import core.presentation.desing_system.EmptyContentComponent
+import core.presentation.desing_system.LoadingScreen
 import e_commerce.presentation.product_detail.components.ProductDetailsBottomComponent
 import e_commerce.presentation.product_detail.components.ProductDetailsInfo
 import e_commerce.presentation.product_detail.components.ProductDetailsMovingBackground

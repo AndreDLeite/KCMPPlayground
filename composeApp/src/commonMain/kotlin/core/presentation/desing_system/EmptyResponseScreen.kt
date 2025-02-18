@@ -1,4 +1,4 @@
-package core.presentation
+package core.presentation.desing_system
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement

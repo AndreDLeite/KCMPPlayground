@@ -3,10 +3,9 @@ package core.presentation
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import core.domain.enums.AppTheme
 
-enum class AppTheme {
-    GoldenYellow, MacRed, BlueySky
-}
+const val APP_THEME_KEY = "APP_THEME"
 
 private val YellowColorScheme = lightColorScheme(
     primary = LightOrange,
@@ -61,10 +60,10 @@ fun MyApplicationTheme(
         AppTheme.GoldenYellow -> {
             YellowColorScheme
         }
-        AppTheme.MacRed -> {
+        AppTheme.MacRed       -> {
             RedColorScheme
         }
-        AppTheme.BlueySky -> {
+        AppTheme.BlueySky     -> {
             BlueColorScheme
         }
     }

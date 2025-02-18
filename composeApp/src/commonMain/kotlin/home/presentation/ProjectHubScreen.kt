@@ -17,7 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import core.presentation.DSDefaultText
+import core.presentation.desing_system.DSDefaultText
 import home.domain.ProjectType
 import home.presentation.components.ProjectHubTopBar
 

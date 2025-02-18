@@ -15,7 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import core.presentation.DSDefaultText
+import core.presentation.desing_system.DSDefaultText
 import kmpplayground.composeapp.generated.resources.Res
 import kmpplayground.composeapp.generated.resources.baseline_favorite_24
 import kmpplayground.composeapp.generated.resources.welcome_user

@@ -1,6 +1,6 @@
 package app.presentation
 
-import core.presentation.AppTheme
+import core.domain.enums.AppTheme
 
 data class AppState(
     val appTheme: AppTheme = AppTheme.GoldenYellow,
