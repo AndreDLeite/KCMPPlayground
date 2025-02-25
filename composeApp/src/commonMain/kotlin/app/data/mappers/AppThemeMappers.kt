@@ -12,10 +12,12 @@ fun String.toAppTheme(): AppTheme {
             AppTheme.MacRed
         }
 
-        AppTheme.BlueySky.name -> {
+        AppTheme.BlueySky.name     -> {
             AppTheme.BlueySky
         }
 
-        else -> AppTheme.GoldenYellow
+        else                       -> {
+            AppTheme.GoldenYellow
+        }
     }
 }

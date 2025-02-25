@@ -10,12 +10,14 @@ import core.presentation.toUiText
 import e_commerce.domain.models.Product
 import e_commerce.domain.repository.ProductRepository
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.milliseconds
 
 // Presentation -> Domain <- Data
 class ProductHomeViewModel(
@@ -75,17 +77,6 @@ class ProductHomeViewModel(
     }
 
     private fun observeSearchQuery(query: String) {
-//        state
-//            .map { it.searchQuery }
-//            .distinctUntilChanged()
-//            .debounce(500L)
-//            .onEach { query ->
-//                when {
-//                    query.isBlank() -> getProducts()
-//                    else -> getProducts()
-//                }
-//            }
-//            .launchIn(viewModelScope)
         val filteredList = currentProducts.filter {
             it.name.contains(
                 query.trim(),
@@ -107,6 +98,7 @@ class ProductHomeViewModel(
                     isLoading = true,
                 )
             }
+            delay(200.milliseconds)
             productRepository
                 .getProducts()
                 .onSuccess {
@@ -115,6 +107,7 @@ class ProductHomeViewModel(
                         state.copy(
                             isLoading = false,
                             products = it,
+                            errorMessage = null,
                         )
                     }
                 }

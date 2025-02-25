@@ -26,4 +26,7 @@ sealed interface Screens {
 
     @Serializable
     data class ECommerceProductDetails(val productId: String) : Screens
+
+    @Serializable
+    data object ECommerceSettings : Screens
 }

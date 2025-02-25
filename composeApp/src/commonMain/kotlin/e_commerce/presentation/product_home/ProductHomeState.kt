@@ -11,4 +11,11 @@ data class ProductHomeState(
     val products: List<Product> = emptyList(),
     val searchQuery: String = String(),
     val selectedTabIndex: Int = 0,
-)
+) {
+    val isError: Boolean
+        get() = errorMessage != null
+
+    val hasNoProduct: Boolean
+        get() = products.isEmpty()
+
+}

@@ -23,5 +23,8 @@
     <string name="product_details_description_title">Description</string>
     <string name="product_favorites_title">Favorites</string>
     <string name="empty_product_favorites_title">You don't have any favorites!</string>
+    <string name="settings_title">Settings</string>
+    <string name="settings_theme_picker_title">Choose a theme to be applied to the app:</string>
+    <string name="settings_theme_picker_description">Note: All the app will be changes...</string>
     <!-- endregion -->
 </resources>

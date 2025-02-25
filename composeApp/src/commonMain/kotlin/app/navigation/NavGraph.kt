@@ -12,6 +12,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.toRoute
 import app.presentation.AppAction
+import app.presentation.MainViewModel
 import core.domain.enums.AppTheme
 import e_commerce.presentation.favorite_products.FavoriteProductsScreenRoot
 import e_commerce.presentation.favorite_products.FavoriteProductsViewModel
@@ -19,10 +20,11 @@ import e_commerce.presentation.product_detail.ProductDetailsScreenRoot
 import e_commerce.presentation.product_detail.ProductDetailsViewModel
 import e_commerce.presentation.product_home.ProductHomeScreenRoot
 import e_commerce.presentation.product_home.ProductHomeViewModel
+import e_commerce.presentation.settings.ECommerceSettingsScreenRoot
 import e_commerce.presentation.splash.ECommerceSplashScreenRoot
 import e_commerce.presentation.splash.ECommerceSplashViewModel
-import home.presentation.ProjectsHubHomeScreenRoot
 import home.presentation.HomePageViewModel
+import home.presentation.ProjectsHubHomeScreenRoot
 import kotlinx.coroutines.flow.Flow
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
@@ -79,15 +81,15 @@ fun NavGraph(
                     onProductClick = { productId ->
                         navGraphNavigator.navigate(Screens.ECommerceProductDetails(productId))
                     },
-                    onSettingsClick = {
-                        onGlobalEvent(AppAction.OnThemeChange(AppTheme.MacRed))
-                    },
                     onProfileClick = {
-                        onGlobalEvent(AppAction.OnThemeChange(AppTheme.GoldenYellow))
+                        onGlobalEvent(AppAction.OnThemeChange(AppTheme.MacRed))
                     },
                     onNotificationsClick = {
                         onGlobalEvent(AppAction.OnThemeChange(AppTheme.BlueySky))
-                    }
+                    },
+                    onSettingsClick = {
+                        navGraphNavigator.navigate(Screens.ECommerceSettings)
+                    },
                 )
             }
 
@@ -120,6 +122,20 @@ fun NavGraph(
                     navGraphNavigator.navigateUp()
                 }
 
+            }
+
+            composable<Screens.ECommerceSettings> {
+                val viewModel = koinViewModel<MainViewModel>()
+
+                ECommerceSettingsScreenRoot(
+                    viewModel = viewModel,
+                    onGoBack = {
+                        navGraphNavigator.navigateUp()
+                    },
+                    onThemeChange = { appTheme ->
+                        onGlobalEvent(AppAction.OnThemeChange(appTheme))
+                    }
+                )
             }
         }
     }

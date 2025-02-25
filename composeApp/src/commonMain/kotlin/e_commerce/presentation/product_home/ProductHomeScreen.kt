@@ -29,9 +29,9 @@ fun ProductHomeScreenRoot(
     onFavoritesClick: () -> Unit,
     onShoppingCartClick: () -> Unit,
     onProductClick: (productId: String) -> Unit,
-    onSettingsClick: () -> Unit,
     onProfileClick: () -> Unit,
     onNotificationsClick: () -> Unit,
+    onSettingsClick: () -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -119,28 +119,29 @@ fun ProductHomeScreen(
                             )
 
                             when {
-                                state.isLoading            -> {
+                                state.isLoading          -> {
                                     LoadingScreen()
                                 }
 
-                                state.errorMessage != null -> {
+                                state.isError            -> {
                                     EmptyContentComponent(
                                         painter = painterResource(Res.drawable.baseline_clear_24),
-                                        message = state.errorMessage.asString(),
+                                        message = state.errorMessage!!.asString(),
                                         withRetryButton = true,
-                                    ) {
-                                        onAction(ProductHomeAction.OnRetryClick)
-                                    }
+                                        onRetryClick = {
+                                            onAction(ProductHomeAction.OnRetryClick)
+                                        }
+                                    )
                                 }
 
-                                state.products.isEmpty()   -> {
+                                state.hasNoProduct -> {
                                     EmptyContentComponent(
                                         painter = painterResource(Res.drawable.baseline_clear_24),
                                         message = "No products found...",
                                     )
                                 }
 
-                                else                       -> {
+                                else                     -> {
                                     ProductListScreenRoot(
                                         state,
                                         bottomPadding = innerPadding.calculateBottomPadding()
