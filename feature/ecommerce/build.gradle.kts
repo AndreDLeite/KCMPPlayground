@@ -26,7 +26,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "ComposeApp"
+            baseName = "ecommerce"
             isStatic = true
         }
     }
@@ -75,7 +75,6 @@ kotlin {
 
             api(libs.datastore.preferences)
             api(libs.datastore)
-            implementation(project(":feature:ecommerce"))
 
         }
         desktopMain.dependencies {
@@ -94,11 +93,11 @@ kotlin {
 }
 
 android {
-    namespace = "adl.appture.kcmp"
+    namespace = "adl.appture.ecommerce"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "adl.appture.kcmp"
+        applicationId = "adl.appture.ecommerce"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
@@ -121,8 +120,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":feature:ecommerce"))
-    
     debugImplementation(compose.uiTooling)
 }
 

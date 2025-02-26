@@ -1,5 +1,6 @@
 package app.navigation
 
+import adl.appture.kcmp.ecommerce.EcommerceComposable
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -57,14 +58,16 @@ fun NavGraph(
             composable<Screens.ECommerceSplash> {
                 val viewModel = koinViewModel<ECommerceSplashViewModel>()
 
-                ObserveAsEvents(viewModel.state) { event ->
-                    if (event) {
-                        navGraphNavigator.navigate(Screens.ECommerceHome) {
-                            popUpTo(Screens.ECommerceSplash) { inclusive = true }
-                        }
-                    }
-                }
-                ECommerceSplashScreenRoot()
+                EcommerceComposable()
+
+//                ObserveAsEvents(viewModel.state) { event ->
+//                    if (event) {
+//                        navGraphNavigator.navigate(Screens.ECommerceHome) {
+//                            popUpTo(Screens.ECommerceSplash) { inclusive = true }
+//                        }
+//                    }
+//                }
+//                ECommerceSplashScreenRoot()
             }
 
             composable<Screens.ECommerceHome> {
