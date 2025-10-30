@@ -18,6 +18,10 @@ fun DataError.toUiText(): UiText {
         DataError.Remote.NO_INTERNET -> Res.string.error_no_internet
         DataError.Remote.SERVER -> Res.string.error_unknown
         DataError.Remote.SERIALIZATION -> Res.string.error_serialization
+        DataError.Remote.NOT_FOUND,
+        DataError.Remote.PAYMENT_REQUIRED,
+        DataError.Remote.UNAUTHORIZED,
+        DataError.Remote.BAD_REQUEST,
         DataError.Remote.UNKNOWN -> Res.string.error_unknown
     }
 
